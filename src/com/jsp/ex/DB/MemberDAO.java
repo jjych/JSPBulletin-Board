@@ -57,4 +57,21 @@ public class MemberDAO {
 		}
 		return -1;  // 데이터베이스 오류
 	}
+	
+	public int update(String user , String userPassword, String userName, String userEmail) {
+		String query = "update member set m_pw = ? , m_name = ? , m_email = ? where m_id = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userPassword);
+			pstmt.setString(2, userName);
+			pstmt.setString(3, userEmail);
+			pstmt.setString(4, user);
+			return pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;  // 데이터베이스 오류
+	}
+	
+	
 }
